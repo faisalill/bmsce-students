@@ -1,6 +1,7 @@
 import React from "react";
 import { GiIciclesAura } from "react-icons/gi";
 import { AiFillFacebook, AiFillInstagram, AiFillTwitterCircle } from "react-icons/ai";
+import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="footer footer-center p-10 bg-primary text-primary-content">
@@ -15,7 +16,7 @@ const Footer = () => {
           </span>{" "}
           <br />{" "}
           <span className="bg-gradient-to-r from-teal-500 via-lime-500 to-red-500 bg-clip-text text-transparent">
-            BMSCE
+            <Link href='/'>BMSCE</Link>
           </span>{" "}
           Institution Innovation Cell
         </p>
