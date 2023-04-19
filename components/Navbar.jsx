@@ -16,7 +16,9 @@ const Navbar = () => {
     </div>
   </div>
   <div className="navbar-center">
-    <a className="btn btn-ghost normal-case text-xl"><img src="/logos/logo11.png" alt="bmsce-logo" className='h-16' /></a>
+    <a className="btn btn-ghost normal-case text-xl">
+        <img src="/logos/logo11.png" alt="bmsce-logo" className='h-16 relative bottom-2' />
+    </a>
   </div>
   <div className="navbar-end">
     <button className="btn btn-ghost btn-circle">
