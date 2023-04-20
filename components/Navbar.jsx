@@ -1,9 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
-import { ClubInfo } from "@/public/ClubInfo";
-import SignIn from "./SignIn";
 const Navbar = () => {
 
   return (
@@ -37,6 +34,9 @@ const Navbar = () => {
             <li>
               <Link href="/notes">Notes</Link>
             </li>
+            <li>
+              <Link href="/post-event">Post Event</Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -50,7 +50,13 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-end">
-       <SignIn />
+        <Link href='/post-event'>
+      <button className="btn-circle btn">
+      <div className="indicator">
+            <BsFillPersonFill className="scale-[1.7]" />
+          </div>
+        </button>
+        </Link>
       </div>
     </div>
   );
