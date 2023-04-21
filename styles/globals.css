@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notification{
+    animation: slide-in-out 4s ease-out;
+}
+
+@keyframes slide-in-out {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+
+
+
+
