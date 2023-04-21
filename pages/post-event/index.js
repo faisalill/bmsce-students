@@ -10,7 +10,7 @@ import {
   useSignInWithGoogle,
   useSignOut,
 } from "react-firebase-hooks/auth";
-import {message, Image, TimePicker, ConfigProvider, theme, DatePicker } from "antd";
+import {message, Image, TimePicker, ConfigProvider, theme, DatePicker, Popconfirm } from "antd";
 import {
   getStorage,
   ref,
@@ -19,6 +19,7 @@ import {
 } from "firebase/storage";
 import {doc, setDoc, getFirestore} from 'firebase/firestore'
 import {uuidv4} from '@firebase/util'
+
 
 export async function getServerSideProps() {
   const data = {
@@ -50,12 +51,16 @@ const schema = Yup.object().shape({
     .required("Required"),
 });
 
+let EventDetails = {};
+
 const index = ({ data }) => {
   const firebaseApp = initializeApp(data);
   const auth = getAuth(firebaseApp);
   const storage = getStorage(firebaseApp);
   const db = getFirestore(firebaseApp);
   const docRef = doc(db, "events", uuidv4());
+
+
 
   const [user, loading, error] = useAuthState(auth);
   const [disableSignIn, setDisableLogin] = useState(true);
@@ -95,7 +100,11 @@ const index = ({ data }) => {
     validationSchema: schema,
   });
   function formikSubmit(e) {
-    UploadImage(e)
+      handleUpload(e)
+      formik.resetForm();
+      setUploadImage(null);
+      setEventDate(null);
+      setEventTime(dayjs("12:00:am", "h:mm:a").format("h:mm a"))
   }
   function handleUpload(e) {
     if (UploadImage === null) {
@@ -148,15 +157,20 @@ const index = ({ data }) => {
   return (
     <>
     {contextHolder}
+    <ConfigProvider
+                      theme={{
+                        algorithm: darkAlgorithm,
+                      }}
+                    >
       <div
         className={`hero min-h-screen`}
         style={{ backgroundImage: `url("/jjk.jpg")` }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
 
-        {true ? (
+        {user ? (
           <div>
-            <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero-content flex-col ">
               <div className="text-center m-4 lg:text-left">
                 <h1 className="text-5xl font-bold">Post Event</h1>
               </div>
@@ -333,13 +347,28 @@ const index = ({ data }) => {
                     />
                   </div>
                   <div className="form-control mt-6">
+                  <Popconfirm
+              title="Are you sure to upload this event?"
+              description="Make sure all the details are correct."
+              onConfirm={formikSubmit}
+              key="popconfirm"
+            >
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        
                       }}
                     >
-                      Login
+                      Post
+                    </button>
+                    </Popconfirm>
+                    <button
+                      className="btn my-4 btn-primary"
+                      onClick={() => {
+                        signOut();
+                        messageApi.success("Logged Out Successfully");
+                      }}
+                    >
+                      Sign Out
                     </button>
                   </div>
                 </div>
@@ -443,6 +472,7 @@ const index = ({ data }) => {
           </div>
         )}
       </div>
+      </ConfigProvider>
     </>
   );
 };
