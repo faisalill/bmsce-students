@@ -2,6 +2,7 @@ import React from "react";
 import { GiIciclesAura } from "react-icons/gi";
 import { AiFillFacebook, AiFillInstagram, AiFillTwitterCircle } from "react-icons/ai";
 import Link from "next/link";
+import dayjs from "dayjs";
 const Footer = () => {
   return (
     <footer className="footer footer-center p-10 bg-primary text-primary-content">

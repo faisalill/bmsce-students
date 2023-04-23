@@ -53,7 +53,7 @@ const schema = Yup.object().shape({
 
 let EventDetails = {};
 
-const index = ({ data }) => {
+const Home = ({ data }) => {
   const firebaseApp = initializeApp(data);
   const auth = getAuth(firebaseApp);
   const storage = getStorage(firebaseApp);
@@ -477,4 +477,4 @@ const index = ({ data }) => {
   );
 };
 
-export default index;
+export default Home;

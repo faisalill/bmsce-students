@@ -1,6 +1,6 @@
 import React from "react";
-
-const index = () => {
+import dayjs from "dayjs";
+const Home = () => {
   return (
     <>
       <div
@@ -23,4 +23,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;

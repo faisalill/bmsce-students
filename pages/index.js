@@ -34,7 +34,7 @@ export function getServerSideProps () {
 
 var itemData = [];
 
-const index = ({data}) => {
+const Home = ({data}) => {
 
   const app = initializeApp(data);
 const storage = getStorage(app);
@@ -260,4 +260,4 @@ const [messageApi, contextHolder] = message.useMessage()
     )
 }
 
-export default index
+export default Home
