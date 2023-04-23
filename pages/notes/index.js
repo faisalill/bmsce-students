@@ -14,7 +14,7 @@ const index = () => {
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Coming Soon...</h1>
             <p className="mb-5">
-            Notes || Completed Assignment || Records
+            Notes || Completed Assignments || Records
             </p>
           </div>
         </div>
