@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { ClubInfo } from "@/public/ClubInfo";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -54,6 +55,7 @@ const schema = Yup.object().shape({
 let EventDetails = {};
 
 const Home = ({ data }) => {
+  const router = useRouter();
   const firebaseApp = initializeApp(data);
   const auth = getAuth(firebaseApp);
   const storage = getStorage(firebaseApp);
@@ -140,9 +142,10 @@ const Home = ({ data }) => {
             };
             setDoc(docRef, EventDetails).then(()=>{
             messageApi.destroy("uploading")
+            messageApi.success("Event Posted Successfully")
+            router.push("/")
             formik.resetForm();
             setUploadImage(null);
-            e.stopPropagation()
             })
             .catch((err) => 
             {
@@ -437,7 +440,6 @@ const Home = ({ data }) => {
                            }
                            for(const clubs of ClubInfo){
                             if(clubs.ClubEmailID !== res.user.email || clubs.ClubLeaderEmailId !== res.user.email || clubs.SecondLeaderEmail !== res.user.email){
-                              setModalOpen(false);
                               messageApi.error('This Email is not allowed to login');
                               signOut();
                               return;
