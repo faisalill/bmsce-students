@@ -112,8 +112,8 @@ const Home = ({ data }) => {
     if (UploadImage === null) {
       alert("Please upload an image");
     } else {
-      
-      const storageRef = ref(storage, `images/${UploadImage.uid}${UploadImage.lastModified}`);
+      const imageId = uuidv4()
+      const storageRef = ref(storage, `images/${imageId}`);
       const uploadTask = uploadBytesResumable(storageRef, UploadImage);
       uploadTask.on(
         "state_changed",
@@ -137,7 +137,7 @@ const Home = ({ data }) => {
               EventDate: EventDate,
               EventTime: EventTime,
               UploadImage: url,
-              imageId: UploadImage.uid + UploadImage.lastModified,
+              imageId: imageId,
               postingEmail: user.email,
             };
             setDoc(docRef, EventDetails).then(()=>{
@@ -159,6 +159,14 @@ const Home = ({ data }) => {
   }
   return (
     <>
+    <div
+    className="btn"
+    onClick={() => {
+     
+    }}
+    >
+      Check
+    </div>
     {contextHolder}
     <ConfigProvider
                       theme={{

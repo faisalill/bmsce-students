@@ -243,6 +243,7 @@ const Home = ({ data }) => {
                                             )
                                           ).then(() => {
                                             messageApi.destroy("delete");
+                                            messageApi.success("Deleted");
                                           });
                                         })
                                       );
